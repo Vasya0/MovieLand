@@ -1,3 +1,5 @@
+package Entity;
+
 public class Country {
     private int countryID;
     private String name;
@@ -5,6 +7,14 @@ public class Country {
     public Country(int countryID, String name) {
         this.countryID = countryID;
         this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return "Country{" +
+                "countryID=" + countryID +
+                ", name='" + name + '\'' +
+                '}';
     }
 
     public int getCountryID() {
