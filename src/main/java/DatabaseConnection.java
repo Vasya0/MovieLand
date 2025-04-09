@@ -1,18 +1,26 @@
 import Entity.*;
-
 import java.sql.*;
 import java.util.List;
 
 public class DatabaseConnection {
     private Connection connection;
-    private String url = "jdbc:mysql://localhost:3306/Films";
-    private String user = "root";
-    private String password = "NewSecurePassword";
+
+
+   // private String url = "jdbc:mysql://localhost:3306/Films";
+    //private String user = "root";
+    //private String password = "NewSecurePassword";
+    //private String url = "jdbc:mysql://localhost::8082/Films";
+   private String url = "jdbc:h2:~/test";
+   //private String user = "NEWUSER";
+   private String user = "sa";
+   //private String password = "p";
+    private String password = "";
 
     public DatabaseConnection() {
 
 
         try {
+            // Class.forName("org.h2.Driver");
             this.connection = DriverManager.getConnection(url, user, password);
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -23,7 +31,7 @@ public class DatabaseConnection {
     public void userWrite(User user) {
 
 
-        String insertSQL = "INSERT INTO users (UserId,userName,password,email) VALUES ('" + user.getUserId() + "','" + user.getUsername() + "','" + user.getPassword() + "','" + user.getEmail() + "');";
+        String insertSQL = "INSERT INTO FILMS.USERS (UserId,userName,password,email) VALUES ('" + user.getUserId() + "','" + user.getUsername() + "','" + user.getPassword() + "','" + user.getEmail() + "');";
         try {
             Statement stmt = connection.createStatement();
             stmt.execute(insertSQL);
@@ -37,7 +45,7 @@ public class DatabaseConnection {
     public void userFind(User user) {
 
 
-        String selectSQL = "SELECT * FROM users WHERE userID=" + user.getUserId() + ";";
+        String selectSQL = "SELECT * FROM FILMS.users WHERE userID=" + user.getUserId() + ";";
 
         try {
 
@@ -77,7 +85,7 @@ public class DatabaseConnection {
     public void commentWrite(Comment comment) {
 
 
-        String insertSQL = "INSERT INTO comments (movieId,userId,description,rate) VALUES ('" + comment.getMovieId() + "','" + comment.getUserId() + "','" + comment.getDescription() + "','" + comment.getRate() + "');";
+        String insertSQL = "INSERT INTO FILMS.comments (movieId,userId,description,rate) VALUES ('" + comment.getMovieId() + "','" + comment.getUserId() + "','" + comment.getDescription() + "','" + comment.getRate() + "');";
         try {
             System.out.println(insertSQL);
             Statement stmt = connection.createStatement();
@@ -93,7 +101,7 @@ public class DatabaseConnection {
 
 
 
-        String selectSQL = "SELECT * FROM comments WHERE userID=" + comment.getUserId() + ";";
+        String selectSQL = "SELECT * FROM FILMS.comments WHERE userID=" + comment.getUserId() + ";";
 
         try {
 
@@ -119,7 +127,7 @@ public class DatabaseConnection {
     public void commentDelete(Comment comment) {
 
 
-        String deleteSQL = "DELETE FROM comments WHERE userID=" + comment.getUserId() + "AND movieId="+ comment.getMovieId()+";";
+        String deleteSQL = "DELETE FROM FILMS.comments WHERE userID=" + comment.getUserId() + "AND movieId="+ comment.getMovieId()+";";
 
         try {
             System.out.println(deleteSQL);
@@ -136,7 +144,7 @@ public class DatabaseConnection {
     public void ratingWrite(Rating rating) {
 
 
-        String insertSQL = "INSERT INTO ratings (movieId,IMDb,critics,rate) VALUES ('" + rating.getMovieId() + "','" + rating.getIMDb() + "','" + rating.getCritics() + "','" + rating.getRate() + "');";
+        String insertSQL = "INSERT INTO FILMS.ratings (movieId,IMDb,critics,rate) VALUES ('" + rating.getMovieId() + "','" + rating.getIMDb() + "','" + rating.getCritics() + "','" + rating.getRate() + "');";
         try {
             Statement stmt = connection.createStatement();
             stmt.execute(insertSQL);
@@ -149,7 +157,7 @@ public class DatabaseConnection {
     public void ratingDelete(Rating rating) {
 
 
-        String deleteSQL = "DELETE FROM comments WHERE userID=" + rating.getMovieId()+";";
+        String deleteSQL = "DELETE FROM FILMS.comments WHERE userID=" + rating.getMovieId()+";";
 
         try {
             Statement stmt = connection.createStatement();
@@ -163,7 +171,7 @@ public class DatabaseConnection {
     public void ratingFind(Rating rating) {
 
 
-        String selectSQL = "SELECT movieId,IMDb,critics,rate FROM ratings WHERE movieId=" + rating.getMovieId() + ";";
+        String selectSQL = "SELECT movieId,IMDb,critics,rate FROM FILMS.ratings WHERE movieId=" + rating.getMovieId() + ";";
 
         try {
 
@@ -189,9 +197,9 @@ public class DatabaseConnection {
 
     //movies
     public void initGenres() {
-        //String insertSQL = "INSERT INTO genres (genreId,name) VALUES (1,'Thriller');";
-        // String insertSQL = "INSERT INTO genres (genreId,name) VALUES (2,'Drama');";
-        String insertSQL = "INSERT INTO genres (genreId,name) VALUES (3,'Crime');";
+       String insertSQL = "INSERT INTO FILMS.genres (genreId,name) VALUES (1,'Thriller');";
+        // String insertSQL = "INSERT INTO FILMS.genres (genreId,name) VALUES (2,'Drama');";
+        //  String insertSQL = "INSERT INTO FILMS.GENRES (genreId,name) VALUES (3,'Crime');";
         try {
             System.out.println(insertSQL);
             Statement stmt = connection.createStatement();
@@ -204,9 +212,9 @@ public class DatabaseConnection {
     }
 
     public void initCountries() {
-        //String insertSQL = "INSERT INTO countries (countryId,name) VALUES (1,'USA');";
-        //String insertSQL = "INSERT INTO countries (countryId,name) VALUES (2,'Canada');";
-        String insertSQL = "INSERT INTO countries (countryId,name) VALUES (3,'Great Britain');";
+        String insertSQL = "INSERT INTO FILMS.countries (countryId,name) VALUES (1,'USA');";
+        // String insertSQL = "INSERT INTO FILMS.countries (countryId,name) VALUES (2,'Canada');";
+        // String insertSQL = "INSERT INTO FILMS.COUNTRIES (countryId,name) VALUES (3,'Great Britain');";
         try {
             Statement stmt = connection.createStatement();
             stmt.execute(insertSQL);
@@ -220,7 +228,7 @@ public class DatabaseConnection {
 
     public void writeMovie(Movie movie) {
 
-        String insertSQL = "INSERT INTO movies (movieId,nameRUS,nameENG,year,description,price) VALUES ('" + movie.getMovieID() + "','" + movie.getNameRUS() + "','" + movie.getNameENG() + "','" + movie.getYear() + "','" + movie.getDescription() + "','" + movie.getPrice() + "');";
+        String insertSQL = "INSERT INTO FILMS.MOVIES (movieId,nameRUS,nameENG,yearr,description,price) VALUES ('" + movie.getMovieID() + "','" + movie.getNameRUS() + "','" + movie.getNameENG() + "','" + movie.getYear() + "','" + movie.getDescription() + "','" + movie.getPrice() + "');";
 
         List<Country> countries = movie.getCountry();
         List<Genre> genres = movie.getGenre();
@@ -231,13 +239,13 @@ public class DatabaseConnection {
             stmt.execute(insertSQL);
             for (int i = 0; i < countries.size(); i++) {
                 System.out.println(countries.get(i).getCountryID());
-                String insertCountriesSQL = "INSERT INTO movieCountry (movieId,countryID) VALUES ('" + movie.getMovieID() + "','" + countries.get(i).getCountryID() + "');";
+                String insertCountriesSQL = "INSERT INTO FILMS.movieCountry (movieId,countryID) VALUES ('" + movie.getMovieID() + "','" + countries.get(i).getCountryID() + "');";
                 stmt.execute(insertCountriesSQL);
 
             }
             for (int i = 0; i < genres.size(); i++) {
 
-                String insertGenreSQL = "INSERT INTO movieGenre (movieId,genreID) VALUES ('" + movie.getMovieID() + "','" + genres.get(i).getId() + "');";
+                String insertGenreSQL = "INSERT INTO FILMS.movieGenre (movieId,genreID) VALUES ('" + movie.getMovieID() + "','" + genres.get(i).getId() + "');";
                 stmt.execute(insertGenreSQL);
             }
             System.out.println("Inserted data into 'movies'.");
@@ -250,7 +258,7 @@ public class DatabaseConnection {
     public void movieFind(Movie movie) {
 
 
-        String selectSQL = "SELECT * FROM movies m LEFT JOIN movieCountry c on m.movieId=c.movieId  LEFT JOIN movieGenre g on c.movieId=g.movieId  WHERE  m.movieId=" + movie.getMovieID() + ";";
+        String selectSQL = "SELECT * FROM FILMS.movies m LEFT JOIN FILMS.movieCountry c on m.movieId=c.movieId  LEFT JOIN FILMS.movieGenre g on c.movieId=g.movieId  WHERE  m.movieId=" + movie.getMovieID() + ";";
 
         try {
 
