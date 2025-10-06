@@ -1,20 +1,36 @@
-package Entity;
+package Service;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "ratings")
 public class Rating {
+    @Id
+    @Column(name = "movieid")
     private int movieId;
     private double IMDb;
     private int critics;
     private double rate;
 
 
-    public Rating(int movieId,double  rate) {
-        this.movieId = movieId;
-        this.rate=rate;
-    }
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @MapsId
+    @JoinColumn(name = "movieid")
+    @JsonBackReference
+    private Movie movie;
 
     public Rating() {
 
     }
+    public Rating(int movieId,double  rate) {
+
+        this.movieId = movieId;
+        this.rate=rate;
+    }
+
+
 
     public int getMovieId() {
         return movieId;
@@ -54,7 +70,15 @@ public class Rating {
         return rate;
     }
 
-    public void setRate(int rate) {
+    public void setRate(double rate) {
         this.rate = rate;
+    }
+
+    public Movie getMovie() {
+        return movie;
+    }
+
+    public void setMovie(Movie movie) {
+        this.movie = movie;
     }
 }

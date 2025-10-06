@@ -1,7 +1,5 @@
 package Service;
 
-import Entity.Movie;
-
 public interface serviceAble<T> {
 
 

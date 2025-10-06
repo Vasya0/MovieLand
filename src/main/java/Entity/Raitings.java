@@ -1,9 +1,8 @@
-package Service;
+package Entity;
 
-import Entity.Comment;
-import Entity.Movie;
-import Entity.Rating;
-import Entity.User;
+import Service.Movie;
+import Service.Rating;
+import Service.serviceAble;
 
 import java.util.ArrayList;
 import java.util.Iterator;

@@ -1,7 +1,7 @@
-package Service;
+package Entity;
 
-import Entity.User;
 
+import Service.User;
 
 import java.util.*;
 
@@ -26,7 +26,7 @@ public class Users {
         Iterator<User> iterator = userList.iterator();
         while (iterator.hasNext()) {
             User element = iterator.next();
-            if (element.getUserId()==id) {
+            if (element.getUserID()==id) {
                 user=element;
                 System.out.println(element.toString());
             }
@@ -39,7 +39,7 @@ public class Users {
         Iterator<User> iterator = userList.iterator();
         while (iterator.hasNext()) {
             User element = iterator.next();
-            if (element.getUserId() == id) {
+            if (element.getUserID() == id) {
                 element.setUsername(name);
                 element.setEmail(email);
                 element.setPassword(password);

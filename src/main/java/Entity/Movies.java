@@ -1,11 +1,11 @@
-package Service;
+package Entity;
 
-import Entity.Movie;
-import Entity.User;
+import Service.Movie;
+import Service.serviceAble;
 
 import java.util.*;
 
-public class Movies implements serviceAble<Movie>{
+public class Movies implements serviceAble<Movie> {
 
 
 
