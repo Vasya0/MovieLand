@@ -1,9 +1,9 @@
-//import Service.*;
-//
-//import java.sql.*;
-//import java.util.List;
-//
-//public class DatabaseConnection {
+
+
+import java.sql.*;
+import java.util.List;
+@Deprecated
+public class DatabaseConnection {
 //    private Connection connection;
 //
 //
@@ -289,4 +289,4 @@
 //   }
 //
 //
-//}
+}
